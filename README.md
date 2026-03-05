@@ -9,6 +9,13 @@ Here you can see my project by clicking on the Open In Colab
 
 ---
 
+## Live Dashboard
+
+View the live dashboard here:
+
+[Dashboard app](https://netflix-eda-dashboard-bhavyasree.streamlit.app/)
+---
+
 ## 📝 Project Description
 
 Netflix has become one of the largest streaming platforms in the world, offering thousands of movies and TV shows across multiple countries and genres.
