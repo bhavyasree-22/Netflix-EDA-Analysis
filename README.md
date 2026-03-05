@@ -3,6 +3,7 @@
 This project performs a comprehensive, end-to-end exploratory analysis of the **Netflix Titles dataset**. The primary objective is to analyze global streaming trends and understand how Netflix’s content library has evolved over time across different countries, genres, and content types.
 
 The study explores patterns in Netflix’s catalog using Python-based data science tools, focusing on identifying how factors such as **content type, genre, country distribution, release year, and ratings** influence the structure of Netflix’s global library.
+Here you can see my project by clicking on the Open In Colab 
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1cmypXSMvrQX-mYi8h5RF1z3RW6iww6PS)
 
