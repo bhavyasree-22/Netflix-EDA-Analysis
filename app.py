@@ -24,7 +24,7 @@ h1, h2, h3 {
 st.title("NETFLIX DATA ANALYSIS DASHBOARD")
 
 # Load dataset
-df = pd.read_csv("/netflix_titles.csv")
+df = pd.read_csv("netflix_titles.csv")
 
 # Movies vs TV shows
 type_counts = df['type'].value_counts()
