@@ -8,8 +8,8 @@ st.set_page_config(layout="wide")
 st.markdown("""
 <style>
 body {
-    background-color:#000000;
-    color:white;
+    background-color: #000000;
+    color: white;
 }
 h1,h2,h3{
 color:#E50914;
@@ -22,20 +22,20 @@ st.title("NETFLIX DATA ANALYSIS DASHBOARD")
 # Load dataset
 df = pd.read_csv("netflix_titles.csv",encoding="latin1")
 
-# Clean data
+# Clean columns
 df['country'] = df['country'].fillna("Unknown")
 df['listed_in'] = df['listed_in'].fillna("Unknown")
 
-# ---------------- TOP ROW ----------------
+# -------- TOP ROW --------
 col1,col2,col3 = st.columns([2,1,1])
 
-# WORLD MAP
+# Map
 with col1:
 
     st.subheader("Total Movies & TV Shows by Country")
 
     country = df['country'].str.split(',').explode().value_counts().reset_index()
-    country.columns=['country','count']
+    country.columns = ['country','count']
 
     fig = px.choropleth(
         country,
@@ -46,62 +46,66 @@ with col1:
         template="plotly_dark"
     )
 
+    fig.update_layout(
+        paper_bgcolor='black',
+        plot_bgcolor='black'
+    )
+
     st.plotly_chart(fig,use_container_width=True)
 
-# RATINGS
+
+# Ratings
 with col2:
 
     st.subheader("Ratings")
 
-    rating = df['rating'].value_counts().head(15)
+    rating = df['rating'].value_counts().head(10)
 
     fig2 = px.bar(
         x=rating.index,
         y=rating.values,
-        color_discrete_sequence=["red"],
+        color_discrete_sequence=['#E50914'],
         template="plotly_dark"
     )
 
     fig2.update_layout(
-        xaxis_title="Rating",
-        yaxis_title="Count"
+        paper_bgcolor='black',
+        plot_bgcolor='black'
     )
 
     st.plotly_chart(fig2,use_container_width=True)
 
-# MOVIE VS TV
+
+# Movie vs TV bubble
 with col3:
 
     st.subheader("Movies & TV Shows Distribution")
 
-    counts = df['type'].value_counts()
-
-    bubble = pd.DataFrame({
-        "type":counts.index,
-        "count":counts.values,
-        "x":[1,2],
-        "y":[1,1]
-    })
+    type_counts = df['type'].value_counts().reset_index()
+    type_counts.columns=['type','count']
 
     fig3 = px.scatter(
-        bubble,
-        x="x",
-        y="y",
+        type_counts,
+        x=["Movie","TV Show"],
+        y=[1,1],
         size="count",
         color="type",
-        color_discrete_sequence=["red","#ff6b6b"],
+        color_discrete_sequence=["red","#ff7f7f"],
         size_max=200,
         template="plotly_dark"
     )
 
-    fig3.update_layout(showlegend=True)
+    fig3.update_layout(
+        showlegend=True,
+        paper_bgcolor='black'
+    )
 
     st.plotly_chart(fig3,use_container_width=True)
 
-# ---------------- BOTTOM ROW ----------------
+# -------- BOTTOM ROW --------
 col4,col5 = st.columns(2)
 
-# TOP GENRES
+# Genres
 with col4:
 
     st.subheader("Top 10 Genre")
@@ -111,19 +115,20 @@ with col4:
     fig4 = px.bar(
         x=genres.values,
         y=genres.index,
-        orientation="h",
-        color_discrete_sequence=["red"],
+        orientation='h',
+        color_discrete_sequence=['red'],
         template="plotly_dark"
     )
 
     fig4.update_layout(
-        xaxis_title="Count",
-        yaxis_title=""
+        paper_bgcolor='black',
+        plot_bgcolor='black'
     )
 
     st.plotly_chart(fig4,use_container_width=True)
 
-# GROWTH BY YEARS
+
+# Growth
 with col5:
 
     st.subheader("Total Movies & TV Shows by Years")
@@ -137,13 +142,13 @@ with col5:
         x="release_year",
         y="count",
         color="type",
-        color_discrete_sequence=["red","#ff6b6b"],
+        color_discrete_sequence=['red','#ff7f7f'],
         template="plotly_dark"
     )
 
     fig5.update_layout(
-        xaxis_title="release_year",
-        yaxis_title="Count"
+        paper_bgcolor='black',
+        plot_bgcolor='black'
     )
 
     st.plotly_chart(fig5,use_container_width=True)
